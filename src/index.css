@@ -1,0 +1,35 @@
+@import url("https://fonts.googleapis.com/css2?family=Leckerli+One&display=swap");
+@import "tailwindcss";
+
+/* @layer base {
+  html {
+    font-family: "Leckerli One", cursive;
+  }
+} */
+
+/* Scrollbar pour Chrome, Edge, Safari */
+::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f0fdf4; /* Fond clair (vert pâle) */
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #70e575; /* Couleur verte */
+  border-radius: 10px;
+  border: 3px solid #f0fdf4; /* Bordure pour "espacer" */
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #58c04b; /* Vert un peu plus foncé au hover */
+}
+
+/* Scrollbar pour Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #70e575 #f0fdf4;
+}
