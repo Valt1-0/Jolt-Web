@@ -13,7 +13,7 @@ const Navbar = () => {
           whileHover={{ scale: 1.1 }}
           transition={{ type: "spring", stiffness: 300 }}
         >
-          VLEU
+          Jolt
         </motion.a>
 
         <div className="hidden md:flex space-x-8">
