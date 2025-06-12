@@ -1,92 +1,120 @@
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
+import { useAuth } from "../context/authContext"; // adapte le chemin selon ton projet
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const { user, logout, isLoggedIn } = useAuth();
+
+  const toggleMenu = () => setIsOpen(!isOpen);
+
+  const links = [
+    { name: "Map", route: "/map" },
+    { name: "Profile", route: "/profile", auth: true },
+    { name: "Connexion", route: "/auth", auth: false },
+  ];
+
+  const filteredLinks = links.filter(
+    (link) => link.auth === undefined || link.auth === isLoggedIn
+  );
 
   return (
     <nav className="fixed top-0 left-0 w-full bg-white shadow-md z-50">
       <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+        {/* Logo */}
         <motion.a
           href="/"
-          className="text-2xl font-bold text-[#70E575]"
-          whileHover={{ scale: 1.1 }}
+          className="text-4xl font-extrabold text-[#70E575] tracking-wide"
+          whileHover={{ scale: 1.15 }}
           transition={{ type: "spring", stiffness: 300 }}
         >
           Jolt
         </motion.a>
 
-        <div className="hidden md:flex space-x-8">
-          {["Accueil", "Carte", "Fonctionnalités", "Contact"].map((link, i) => (
+        {/* Desktop links */}
+        <div className="hidden md:flex space-x-8 items-center">
+          {filteredLinks.map((link, i) => (
             <motion.a
               key={i}
-              href={`#${link.toLowerCase()}`}
-              className="text-gray-700 font-medium hover:text-[#70E575] transition"
+              href={link.route}
+              className="text-gray-700 font-medium relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-[2px] after:bg-[#70E575] hover:after:w-full after:transition-all after:duration-300"
               whileHover={{ scale: 1.05 }}
               transition={{ duration: 0.2 }}
             >
-              {link}
+              {link.name}
             </motion.a>
           ))}
+          {isLoggedIn && (
+            <button
+              onClick={logout}
+              className="text-red-500 font-medium hover:underline"
+            >
+              Déconnexion
+            </button>
+          )}
         </div>
 
-        {/* Burger menu mobile */}
+        {/* Burger button */}
         <button
-          className="md:hidden focus:outline-none"
-          onClick={() => setIsOpen(!isOpen)}
-          aria-label="Toggle menu"
+          className="md:hidden focus:outline-none z-50 relative w-8 h-6 flex flex-col justify-between"
+          onClick={toggleMenu}
+          aria-label="Menu mobile"
         >
-          <motion.div
-            animate={isOpen ? "open" : "closed"}
-            variants={{
-              closed: { rotate: 0 },
-              open: { rotate: 45 },
-            }}
-            className="w-6 h-0.5 bg-[#70E575] mb-1 rounded"
+          <motion.span
+            animate={isOpen ? { rotate: 45, y: 8 } : { rotate: 0, y: 0 }}
+            className="w-8 h-1 bg-[#70E575] rounded origin-left block"
+            transition={{ duration: 0.3 }}
           />
-          <motion.div
-            animate={isOpen ? "open" : "closed"}
-            variants={{
-              closed: { opacity: 1 },
-              open: { opacity: 0 },
-            }}
-            className="w-6 h-0.5 bg-[#70E575] mb-1 rounded"
+          <motion.span
+            animate={isOpen ? { opacity: 0 } : { opacity: 1 }}
+            className="w-8 h-1 bg-[#70E575] rounded block"
+            transition={{ duration: 0.2 }}
           />
-          <motion.div
-            animate={isOpen ? "open" : "closed"}
-            variants={{
-              closed: { rotate: 0 },
-              open: { rotate: -45 },
-            }}
-            className="w-6 h-0.5 bg-[#70E575] rounded"
+          <motion.span
+            animate={isOpen ? { rotate: -45, y: -8 } : { rotate: 0, y: 0 }}
+            className="w-8 h-1 bg-[#70E575] rounded origin-left block"
+            transition={{ duration: 0.3 }}
           />
         </button>
       </div>
 
-      {/* Menu mobile */}
-      {isOpen && (
-        <motion.div
-          initial={{ height: 0, opacity: 0 }}
-          animate={{ height: "auto", opacity: 1 }}
-          exit={{ height: 0, opacity: 0 }}
-          className="md:hidden bg-white shadow-inner"
-        >
-          <div className="flex flex-col px-6 py-4 space-y-4">
-            {["Accueil", "Carte", "Fonctionnalités", "Contact"].map(
-              (link, i) => (
-                <a
+      {/* Mobile menu */}
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: "auto", opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            className="md:hidden bg-white shadow-inner overflow-hidden"
+          >
+            <div className="flex flex-col px-6 py-6 space-y-5">
+              {filteredLinks.map((link, i) => (
+                <motion.a
                   key={i}
-                  href={`#${link.toLowerCase()}`}
-                  className="text-gray-700 font-medium hover:text-[#70E575] transition"
+                  href={link.route}
                   onClick={() => setIsOpen(false)}
+                  className="text-gray-700 text-lg font-medium hover:text-[#70E575] transition"
+                  whileHover={{ x: 5 }}
+                  transition={{ type: "spring", stiffness: 200 }}
                 >
-                  {link}
-                </a>
-              )
-            )}
-          </div>
-        </motion.div>
-      )}
+                  {link.name}
+                </motion.a>
+              ))}
+              {isLoggedIn && (
+                <button
+                  onClick={() => {
+                    logout();
+                    setIsOpen(false);
+                  }}
+                  className="text-red-500 text-left font-medium hover:underline"
+                >
+                  Déconnexion
+                </button>
+              )}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </nav>
   );
 };
