@@ -1,11 +1,12 @@
-import "../assets/loading.css"; // Ensure this path is correct based on your project structure
+import "../assets/loading.css";
+
 const Loading = () => {
   return (
-    <div className="fixed inset-0 flex items-center justify-center bg-white bg-opacity-80 z-50">
-      <div className="flex space-x-2">
-        <div className="w-8 h-8 rounded-full bg-primary animate-bounce-slow"></div>
-        <div className="w-8 h-8 rounded-full bg-primary animate-bounce-slower"></div>
-        <div className="w-8 h-8 rounded-full bg-primary animate-bounce-slowest"></div>
+    <div className="flex items-center justify-center">
+      <div className="flex space-x-3">
+        <div className="loading-dot delay-0" />
+        <div className="loading-dot delay-150" />
+        <div className="loading-dot delay-300" />
       </div>
     </div>
   );

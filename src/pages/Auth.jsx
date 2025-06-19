@@ -1,18 +1,22 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { login, register } from "../api/auth";
 import { useAuth } from "../context/authContext";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
+import { useAuthAPI } from "../api/auth"; // Adjust the import path as necessary
 
 const Auth = () => {
   const [isLogin, setIsLogin] = useState(true);
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("tyranix61@gmail.com");
+  const [password, setPassword] = useState("Azertyuiop123!");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const [username, setUsername] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+
   const { login: loginUser } = useAuth();
+  const { login, register, verifyEmail } = useAuthAPI();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -21,21 +25,27 @@ const Auth = () => {
 
     try {
       if (isLogin) {
-        const userData = await login(email, password);
+        const userData = await login({ email, password });
         loginUser(userData);
       } else {
+        if (password !== confirmPassword) {
+          setError("Les mots de passe ne correspondent pas.");
+          setLoading(false);
+          return;
+        }
         await register({ username, email, password });
         setError(
           "Inscription réussie ! Vérifie ton adresse e-mail pour activer ton compte."
         );
         setEmail("");
         setPassword("");
+        setConfirmPassword("");
         setUsername("");
 
-        // Rediriger vers la connexion après 3 secondes
+        // Redirect to login after 3 seconds
         setTimeout(() => {
           setIsLogin(true);
-          setError(""); // Nettoyer le message d'information
+          setError(""); // Clear the information message
         }, 3000);
       }
     } catch (err) {
@@ -65,7 +75,7 @@ const Auth = () => {
           </p>
         </div>
 
-        {/* Formulaire */}
+        {/* Form */}
         <motion.div
           key={isLogin ? "login" : "signup"}
           initial={{ x: 100, opacity: 0 }}
@@ -116,9 +126,29 @@ const Auth = () => {
               </button>
             </div>
 
+            {!isLogin && (
+              <div className="relative">
+                <input
+                  type={showPassword ? "text" : "password"}
+                  placeholder="Confirmer le mot de passe"
+                  className="w-full border border-gray-300 rounded-md px-4 py-2 pr-10"
+                  value={confirmPassword}
+                  onChange={(e) => setConfirmPassword(e.target.value)}
+                  required
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowPassword((prev) => !prev)}
+                  className="absolute right-3 top-2/4 -translate-y-2/4 text-[#70E575]"
+                >
+                  {showPassword ? <FaEyeSlash /> : <FaEye />}
+                </button>
+              </div>
+            )}
+
             {error && (
               <p
-                className={`text-sm text-center ${
+                className={`text-sm text-center font-semibold ${
                   error.startsWith("Inscription réussie")
                     ? "text-green-600"
                     : "text-red-500"
@@ -146,7 +176,7 @@ const Auth = () => {
             <button
               onClick={() => {
                 setIsLogin(!isLogin);
-                setError(""); // Reset erreur/message quand on change de mode
+                setError(""); // Reset error/message when switching modes
               }}
               className="text-[#70E575] font-semibold hover:underline"
             >

@@ -1,43 +1,59 @@
-const gatewayPort = import.meta.env.VITE_API_GATEWAY_PORT;
-const authPath = import.meta.env.VITE_API_AUTH_PATH;
+import { useFetchWithAuth } from "../hooks/fetchWithAuth";
 
-console.log(`API_USERS_PORT: ${gatewayPort}`);
-console.log(`API_AUTH_PATH: ${authPath}`);
+export function useAuthAPI() {
+  const fetchWithAuth = useFetchWithAuth();
 
-// Fallbacks in case env vars are undefined
-const API_BASE_URL = `http://localhost:${gatewayPort}${authPath}`;
+  const login = async (userData) => {
+    try {
+      const { data, error, status } = await fetchWithAuth(`/auth/getToken`, {
+        method: "POST",
+        body: JSON.stringify(userData),
+      });
 
-export const login = async (email, password) => {
-  try {
-    const response = await fetch(`${API_BASE_URL}/getToken`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email, password }),
-    });
-    if (!response.ok) throw new Error("Login failed");
-    return await response.json();
-  } catch (error) {
-    console.error(error);
-    throw error;
-  }
-};
+      console.log(`Login response: ${JSON.stringify(data)}`);
 
-export const register = async (userData) => {
-  console.log(`Registering user with data: ${JSON.stringify(userData)}`);
+      if (status !== 200 || error) throw new Error(error || "Login failed");
 
-  try {
-    const response = await fetch(`${API_BASE_URL}/register`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "Access-Control-Allow-Origin": "*",
-      },
-      body: JSON.stringify(userData),
-    });
-    if (!response.ok) throw new Error("Registration failed");
-    return await response.json();
-  } catch (error) {
-    console.error(error);
-    throw error;
-  }
-};
+      return await data;
+    } catch (error) {
+      console.error(error);
+      throw error;
+    }
+  };
+
+  const register = async (userData) => {
+    try {
+      const { data, error, status } = await fetchWithAuth(`/auth/register`, {
+        method: "POST",
+        body: JSON.stringify(userData),
+      });
+      if (status !== 201 || error)
+        throw new Error(error || "Registration failed");
+      return await data;
+    } catch (error) {
+      console.error(error);
+      throw error;
+    }
+  };
+
+  const verifyEmail = async (token) => {
+    try {
+      const { data, error, status } = await fetchWithAuth(
+        `/users/verifyEmail?token=${token}`,
+        {
+          method: "GET",
+        }
+      );
+
+      if (status !== 200 || error)
+        throw new Error(error || "Verification failed");
+
+      return await data;
+    } catch (error) {
+      console.error(error);
+      throw error;
+    }
+  };
+
+  return { login, register, verifyEmail };
+}

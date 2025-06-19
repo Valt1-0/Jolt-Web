@@ -1,15 +1,19 @@
+// Navbar.jsx
 import { motion, AnimatePresence } from "framer-motion";
-import { useState } from "react";
-import { useAuth } from "../context/authContext"; // adapte le chemin selon ton projet
+import { useState, useEffect, useRef } from "react";
+import { useAuth } from "../context/authContext";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [navHeight, setNavHeight] = useState(0);
   const { user, logout, isLoggedIn } = useAuth();
+  const navRef = useRef(null);
 
   const toggleMenu = () => setIsOpen(!isOpen);
 
   const links = [
     { name: "Map", route: "/map" },
+    { name: "dadadzd", route: "/verifyEmail", auth: false },
     { name: "Profile", route: "/profile", auth: true },
     { name: "Connexion", route: "/auth", auth: false },
   ];
@@ -18,10 +22,36 @@ const Navbar = () => {
     (link) => link.auth === undefined || link.auth === isLoggedIn
   );
 
+  useEffect(() => {
+    const updateNavHeight = () => {
+      if (navRef.current) {
+        const height = navRef.current.offsetHeight;
+        setNavHeight(height);
+        document.documentElement.style.setProperty(
+          "--navbar-height",
+          `${height}px`
+        );
+      }
+    };
+
+    updateNavHeight();
+
+    const resizeObserver = new ResizeObserver(updateNavHeight);
+    if (navRef.current) {
+      resizeObserver.observe(navRef.current);
+    }
+
+    window.addEventListener("resize", updateNavHeight);
+
+    return () => {
+      resizeObserver.disconnect();
+      window.removeEventListener("resize", updateNavHeight);
+    };
+  }, [isOpen]);
+
   return (
-    <nav className="fixed top-0 left-0 w-full bg-white shadow-md z-50">
+    <nav ref={navRef} className="fixed w-full bg-white shadow-md">
       <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-        {/* Logo */}
         <motion.a
           href="/"
           className="text-4xl font-extrabold text-[#70E575] tracking-wide"
@@ -31,7 +61,6 @@ const Navbar = () => {
           Jolt
         </motion.a>
 
-        {/* Desktop links */}
         <div className="hidden md:flex space-x-8 items-center">
           {filteredLinks.map((link, i) => (
             <motion.a
@@ -45,12 +74,19 @@ const Navbar = () => {
             </motion.a>
           ))}
           {isLoggedIn && (
-            <button
-              onClick={logout}
-              className="text-red-500 font-medium hover:underline"
-            >
-              Déconnexion
-            </button>
+            <div className="flex items-center space-x-2">
+              <img
+                src={user.pp}
+                alt="User"
+                className="w-8 h-8 rounded-full object-cover border border-gray-200"
+              />
+              <button
+                onClick={logout}
+                className="text-red-500 font-medium hover:underline"
+              >
+                Déconnexion
+              </button>
+            </div>
           )}
         </div>
 
@@ -101,15 +137,22 @@ const Navbar = () => {
                 </motion.a>
               ))}
               {isLoggedIn && (
-                <button
-                  onClick={() => {
-                    logout();
-                    setIsOpen(false);
-                  }}
-                  className="text-red-500 text-left font-medium hover:underline"
-                >
-                  Déconnexion
-                </button>
+                <div className="flex items-center space-x-2">
+                  <img
+                    src={user.pp || "https://via.placeholder.com/150"}
+                    alt="User"
+                    className="w-6 h-6 rounded-full object-cover border border-gray-200"
+                  />
+                  <button
+                    onClick={() => {
+                      logout();
+                      setIsOpen(false);
+                    }}
+                    className="text-red-500 text-left font-medium hover:underline"
+                  >
+                    Déconnexion
+                  </button>
+                </div>
               )}
             </div>
           </motion.div>

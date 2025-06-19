@@ -1,25 +1,28 @@
-@keyframes spin-slow {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-@keyframes bounce-slow {
+@keyframes bounce {
   0%, 100% {
     transform: translateY(0);
   }
   50% {
-    transform: translateY(-10px);
+    transform: translateY(-16px);
   }
 }
 
-.animate-spin-slow {
-  animation: spin-slow 8s linear infinite;
+.loading-dot {
+  width: 16px;
+  height: 16px;
+  background-color: #70e575;
+  border-radius: 50%;
+  animation: bounce 1.2s infinite ease-in-out;
 }
 
-.animate-bounce-slow {
-  animation: bounce-slow 2s infinite ease-in-out;
+.delay-0 {
+  animation-delay: 0s;
+}
+
+.delay-150 {
+  animation-delay: 0.15s;
+}
+
+.delay-300 {
+  animation-delay: 0.3s;
 }
