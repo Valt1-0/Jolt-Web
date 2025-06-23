@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { useAuth } from "../context/authContext";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
-import { useAuthAPI } from "../api/auth"; // Adjust the import path as necessary
+import { useAuthAPI } from "../services/authService";
 
 const Auth = () => {
   const [isLogin, setIsLogin] = useState(true);
@@ -56,7 +56,7 @@ const Auth = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-[#f3fdf6] px-4">
+    <div className="flex items-center justify-center bg-[#f3fdf6] px-4">
       <div className="w-full max-w-5xl bg-white rounded-3xl shadow-xl overflow-hidden flex flex-col md:flex-row">
         {/* Illustration */}
         <div className="md:w-1/2 bg-[#70E575] text-white flex flex-col items-center justify-center p-8 relative">

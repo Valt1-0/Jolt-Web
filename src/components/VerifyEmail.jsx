@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router";
-import { useAuthAPI } from "../api/auth";
+import { useAuthAPI } from "../services/authService";
 import Loading from "../components/Loading";
 
 const VerifyEmail = () => {

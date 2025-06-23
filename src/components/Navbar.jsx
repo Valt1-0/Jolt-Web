@@ -1,11 +1,10 @@
 // Navbar.jsx
 import { motion, AnimatePresence } from "framer-motion";
-import { useState, useEffect, useRef } from "react";
+import { useState, useRef } from "react";
 import { useAuth } from "../context/authContext";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [navHeight, setNavHeight] = useState(0);
   const { user, logout, isLoggedIn } = useAuth();
   const navRef = useRef(null);
 
@@ -21,33 +20,6 @@ const Navbar = () => {
   const filteredLinks = links.filter(
     (link) => link.auth === undefined || link.auth === isLoggedIn
   );
-
-  useEffect(() => {
-    const updateNavHeight = () => {
-      if (navRef.current) {
-        const height = navRef.current.offsetHeight;
-        setNavHeight(height);
-        document.documentElement.style.setProperty(
-          "--navbar-height",
-          `${height}px`
-        );
-      }
-    };
-
-    updateNavHeight();
-
-    const resizeObserver = new ResizeObserver(updateNavHeight);
-    if (navRef.current) {
-      resizeObserver.observe(navRef.current);
-    }
-
-    window.addEventListener("resize", updateNavHeight);
-
-    return () => {
-      resizeObserver.disconnect();
-      window.removeEventListener("resize", updateNavHeight);
-    };
-  }, [isOpen]);
 
   return (
     <nav ref={navRef} className="fixed w-full bg-white shadow-md">
@@ -76,7 +48,10 @@ const Navbar = () => {
           {isLoggedIn && (
             <div className="flex items-center space-x-2">
               <img
-                src={user.pp}
+                src={
+                  user.pp ||
+                  "https://cdn-icons-png.flaticon.com/512/219/219988.png"
+                }
                 alt="User"
                 className="w-8 h-8 rounded-full object-cover border border-gray-200"
               />

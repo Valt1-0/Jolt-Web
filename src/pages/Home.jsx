@@ -46,7 +46,7 @@ const Home = () => {
     <div className="bg-white">
       {/* HERO */}
       <motion.section
-        className="min-h-[80vh] flex flex-col lg:flex-row items-center justify-between gap-10 px-6 py-10 max-w-7xl mx-auto"
+        className="flex flex-col lg:flex-row items-center justify-between gap-10 px-6 py-10 max-w-7xl mx-auto"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
@@ -89,7 +89,7 @@ const Home = () => {
       />
       {/* FONCTIONNALITÉS */}
       <motion.section
-        className="py-16 bg-[#70E575]"
+        className="py-8 bg-[#70E575]"
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
@@ -136,7 +136,7 @@ const Home = () => {
       />
       {/* TYPES DE VÉHICULES */}
       <motion.section
-        className="py-16 border-t border-gray-200/80 bg-white"
+        className="py-8 border-t border-gray-200/80 bg-white"
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
@@ -180,7 +180,7 @@ const Home = () => {
 
       {/* STATISTIQUES */}
       <motion.section
-        className="py-16 bg-[#70E575]"
+        className="py-8 bg-[#70E575]"
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.5 }}
