@@ -1,4 +1,4 @@
-import { useAuth } from "../context/authContext"; // Import your custom useAuth hook
+import { useAuth } from "../context/authContext";
 
 const gatewayURL = import.meta.env.VITE_API_GATEWAY_URL;
 
@@ -7,22 +7,19 @@ export function useFetchWithAuth() {
 
   const fetchWithAuth = async (url, options = {}, opts = {}) => {
     try {
-      // Vérifie l'utilisateur pour les routes protégées
       if (opts.protected && !user) {
         return { data: null, error: "Utilisateur non connecté", status: 401 };
       }
 
-      // Prépare les options fetch
       const fetchOptions = {
         ...options,
-        credentials: "include", // Important pour envoyer les cookies
+        credentials: "include",
         headers: {
           ...(options.headers || {}),
           "x-client-type": "web",
         },
       };
 
-      // Ajoute Content-Type si besoin
       if (
         fetchOptions.body &&
         !(fetchOptions.body instanceof FormData) &&
@@ -31,20 +28,12 @@ export function useFetchWithAuth() {
         fetchOptions.headers["Content-Type"] = "application/json";
       }
 
-      console.log(
-        `Fetching URL: ${gatewayURL + url} with options:`,
-        fetchOptions
-      );
-
-      // Première requête
       let response = await fetch(gatewayURL + url, fetchOptions);
 
-      // Si token invalide et route protégée, tente refresh
       if (
         opts.protected &&
         (response.status === 401 || response.status === 403)
       ) {
-        // Tente de rafraîchir le token via le backend (cookie)
         const refreshRes = await fetch(`${gatewayURL}/auth/refreshToken`, {
           method: "POST",
           credentials: "include",
@@ -66,7 +55,6 @@ export function useFetchWithAuth() {
         }
       }
 
-      // Tente de parser la réponse
       let data = null;
       try {
         data = await response.json();

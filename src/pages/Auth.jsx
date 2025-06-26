@@ -56,7 +56,7 @@ const Auth = () => {
   };
 
   return (
-    <div className="flex items-center justify-center bg-[#f3fdf6] px-4">
+    <div className="flex items-center justify-center min-h-screen bg-[#f3fdf6] px-4">
       <div className="w-full max-w-5xl bg-white rounded-3xl shadow-xl overflow-hidden flex flex-col md:flex-row">
         {/* Illustration */}
         <div className="md:w-1/2 bg-[#70E575] text-white flex flex-col items-center justify-center p-8 relative">
@@ -176,7 +176,7 @@ const Auth = () => {
             <button
               onClick={() => {
                 setIsLogin(!isLogin);
-                setError(""); // Reset error/message when switching modes
+                setError("");
               }}
               className="text-[#70E575] font-semibold hover:underline"
             >

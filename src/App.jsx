@@ -6,14 +6,15 @@ import Auth from "./pages/Auth";
 import Navbar from "./components/Navbar";
 import { AuthProvider, useAuth } from "./context/authContext";
 import VerifyEmail from "./components/VerifyEmail";
+import Roadbook from "./pages/Roadbook";
+import { Toaster } from "sonner";
+import Subscription from "./pages/Subscription";
 
-// ProtectedRoute component to handle routes that require authentication
 const ProtectedRoute = ({ children }) => {
   const { isLoggedIn } = useAuth();
   return isLoggedIn ? children : <Navigate to="/auth" />;
 };
 
-// AuthRoute component to handle routes that should not be accessible if logged in
 const AuthRoute = ({ children }) => {
   const { isLoggedIn } = useAuth();
   return isLoggedIn ? <Navigate to="/" /> : children;
@@ -24,6 +25,7 @@ function App() {
     <AuthProvider>
       <Router>
         <Navbar />
+        <Toaster position="top-right" richColors />
         <div className="pt-18">
           <Routes>
             <Route
@@ -36,6 +38,14 @@ function App() {
             />
             <Route path="/verifyEmail" element={<VerifyEmail />} />
             <Route
+              path="/roadbook"
+              element={
+                <ProtectedRoute>
+                  <Roadbook />
+                </ProtectedRoute>
+              }
+            />
+            <Route
               path="/map"
               element={
                 <ProtectedRoute>
@@ -43,6 +53,7 @@ function App() {
                 </ProtectedRoute>
               }
             />
+            <Route path="/subscription" element={<Subscription />} />
             <Route
               path="/profile"
               element={

@@ -11,8 +11,8 @@ const Navbar = () => {
   const toggleMenu = () => setIsOpen(!isOpen);
 
   const links = [
-    { name: "Map", route: "/map" },
-    { name: "dadadzd", route: "/verifyEmail", auth: false },
+    { name: "Roadbook", route: "/roadbook", auth: true },
+    { name: "Abonnement", route: "/subscription", auth: false },
     { name: "Profile", route: "/profile", auth: true },
     { name: "Connexion", route: "/auth", auth: false },
   ];

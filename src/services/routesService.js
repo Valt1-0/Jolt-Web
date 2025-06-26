@@ -1,19 +1,6 @@
-const OPENROUTESERVICE_API_KEY = import.meta.env.VITE_ORS_KEY;
+import { useFetchWithAuth } from "../hooks/fetchWithAuth";
 
-export async function snapToRoad({ lat, lng }) {
-  try {
-    const response = await fetch(
-      `https://api.openrouteservice.org/geocode/snap-to-road?api_key=${OPENROUTESERVICE_API_KEY}&point.lon=${lng}&point.lat=${lat}`
-    );
-    const data = await response.json();
-    if (!data?.features?.length) throw new Error("No snapped point");
-    const [snappedLng, snappedLat] = data.features[0].geometry.coordinates;
-    return { lat: snappedLat, lng: snappedLng };
-  } catch (error) {
-    console.warn("Snap échoué, on garde la position d'origine", error);
-    return { lat, lng };
-  }
-}
+const OPENROUTESERVICE_API_KEY = import.meta.env.VITE_ORS_KEY;
 
 export async function fetchRouteFromPoints(points) {
   try {
@@ -57,4 +44,159 @@ export async function searchAddress(query) {
     console.error("Erreur lors de la recherche d'adresse :", err);
     return [];
   }
+}
+
+export function useRoutesAPI() {
+  const fetchWithAuth = useFetchWithAuth();
+
+  const addNavigation = async (navigationData) => {
+    try {
+      const { data, error, status } = await fetchWithAuth(
+        `/navigate/`,
+        {
+          method: "POST",
+          body: JSON.stringify(navigationData),
+        },
+        {
+          protected: true,
+        }
+      );
+
+      if (status !== 201 || error) {
+        throw new Error(error || "Failed to add navigation");
+      }
+
+      return await data;
+    } catch (error) {
+      console.error(error);
+      throw error;
+    }
+  };
+
+  const getNavigations = async (options) => {
+    try {
+      const { data, error, status } = await fetchWithAuth(
+        `/navigate${options}`,
+        {
+          method: "GET",
+        },
+        {
+          protected: true,
+        }
+      );
+
+      if (status !== 200 || error) {
+        throw new Error(error || "Failed to fetch navigations");
+      }
+
+      return await data;
+    } catch (error) {
+      console.error(error);
+      throw error;
+    }
+  };
+
+  const getNavigationById = async (id) => {
+    try {
+      const { data, error, status } = await fetchWithAuth(
+        `/navigate/${id}`,
+        {
+          method: "GET",
+        },
+        {
+          protected: true,
+        }
+      );
+
+      console.log("getNavigationById response:", data, error, status);
+
+      if (status !== 200 || error) {
+        throw new Error(error || "Failed to delete navigation");
+      }
+
+      return data;
+    } catch (error) {
+      console.error(error);
+      throw error;
+    }
+  };
+
+  const updateNavigationVisibility = async (id) => {
+    try {
+      const { data, error, status } = await fetchWithAuth(
+        `/navigate/${id}/visibility`,
+        {
+          method: "PATCH",
+        },
+        {
+          protected: true,
+        }
+      );
+
+      if (status !== 200 || error) {
+        throw new Error(error || "Failed to update navigation visibility");
+      }
+
+      return await data;
+    } catch (error) {
+      console.error(error);
+      throw error;
+    }
+  };
+
+  const deleteNavigation = async (id) => {
+    try {
+      const { data, error, status } = await fetchWithAuth(
+        `/navigate/${id}`,
+        {
+          method: "DELETE",
+        },
+        {
+          protected: true,
+        }
+      );
+
+      if (status !== 200 || error) {
+        throw new Error(error || "Failed to delete navigation");
+      }
+
+      return await data;
+    } catch (error) {
+      console.error(error);
+      throw error;
+    }
+  };
+
+  const updateNavigation = async (id, navigationData) => {
+    try {
+      const { data, error, status } = await fetchWithAuth(
+        `/navigate/${id}`,
+        {
+          method: "PUT",
+          body: JSON.stringify(navigationData),
+        },
+        {
+          protected: true,
+        }
+      );
+
+      if (status !== 200 || error) {
+        throw new Error(error || "Failed to update navigation");
+      }
+
+      return await data;
+    } catch (error) {
+      console.error(error);
+      throw error;
+    }
+  };
+
+  return {
+    addNavigation,
+    getNavigations,
+    getNavigationById,
+    updateNavigationVisibility,
+    deleteNavigation,
+    updateNavigation,
+  };
 }
