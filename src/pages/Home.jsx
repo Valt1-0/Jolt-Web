@@ -136,7 +136,7 @@ const Home = () => {
       />
       {/* TYPES DE VÉHICULES */}
       <motion.section
-        className="py-8 border-t border-gray-200/80 bg-white"
+        className="py-8  bg-white"
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}

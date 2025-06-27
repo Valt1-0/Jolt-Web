@@ -59,6 +59,8 @@ const Map = () => {
   const [startTime, setStartTime] = useState("");
   const [showUpdateModal, setShowUpdateModal] = useState(false);
   const [isOwner, setIsOwner] = useState(false);
+  const [isGroup, setIsGroup] = useState(false);
+
   const [mode, setMode] = useState("create"); // "create" | "edit" | "view"
 
   const mapRef = useRef();
@@ -151,6 +153,7 @@ const Map = () => {
             setPoints(gpxPoints);
             setName(response.data.name || "");
             setIsOwner(response.data.isOwner);
+            setIsGroup(response.data.isGroup || false);
 
             // 👇 Logique corrigée ici
             if (response.data.isOwner) {
@@ -224,6 +227,7 @@ const Map = () => {
         })),
         totalDistance: distance * 1000,
         duration,
+        isGroup,
       });
       setShowUpdateModal(false);
       toast.success("Trajet mis à jour avec succès !");
@@ -254,6 +258,7 @@ const Map = () => {
           speed: 0,
         })),
         totalDistance: distance * 1000,
+        isGroup,
       });
       document.getElementById("my_modal").close();
       setName("");
@@ -406,6 +411,22 @@ const Map = () => {
         {loadingRoute && (
           <p className="text-blue-500 mb-4">Calcul de l'itinéraire...</p>
         )}
+
+        <div className="flex items-center justify-between mb-4">
+          <label
+            htmlFor="isGroup"
+            className="text-sm font-medium text-gray-700"
+          >
+            Trajet de groupe
+          </label>
+          <input
+            id="isGroup"
+            type="checkbox"
+            className="toggle toggle-success"
+            checked={isGroup}
+            onChange={() => setIsGroup(!isGroup)}
+          />
+        </div>
 
         <div className="mt-auto space-y-4">
           <motion.button
