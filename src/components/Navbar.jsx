@@ -11,15 +11,30 @@ const Navbar = () => {
   const toggleMenu = () => setIsOpen(!isOpen);
 
   const links = [
+    {
+      name: "Dashboard",
+      route: "/dashboard",
+      auth: true,
+      roles: ["admin", "pro"],
+    },
     { name: "Roadbook", route: "/roadbook", auth: true },
+    { name: "Mes maintenances", route: "/maintains", auth: true },
     { name: "Abonnement", route: "/subscription", auth: false },
     { name: "Profile", route: "/profile", auth: true },
     { name: "Connexion", route: "/auth", auth: false },
   ];
 
-  const filteredLinks = links.filter(
-    (link) => link.auth === undefined || link.auth === isLoggedIn
-  );
+  const filteredLinks = links.filter((link) => {
+    if (link.auth === undefined) return true;
+
+    if (link.auth && !isLoggedIn) return false;
+
+    if (!link.auth && isLoggedIn) return false;
+
+    if (link.roles && !link.roles.includes(user?.role)) return false;
+
+    return true;
+  });
 
   return (
     <nav ref={navRef} className="fixed w-full bg-white shadow-md">
@@ -49,7 +64,7 @@ const Navbar = () => {
             <div className="flex items-center space-x-2">
               <img
                 src={
-                  user.pp ||
+                  user.profilePicture ||
                   "https://cdn-icons-png.flaticon.com/512/219/219988.png"
                 }
                 alt="User"

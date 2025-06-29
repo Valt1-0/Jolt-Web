@@ -15,7 +15,7 @@ import {
   useRoutesAPI,
   fetchRouteFromPoints,
   searchAddress,
-} from "../services/routesService";
+} from "../services/routeService";
 import { GarminBuilder } from "gpx-builder";
 import { FaSearch } from "react-icons/fa";
 import { toast } from "sonner";

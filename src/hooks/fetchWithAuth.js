@@ -42,9 +42,9 @@ export function useFetchWithAuth() {
 
         if (refreshRes.ok) {
           const refreshData = await refreshRes.json();
-          login(refreshData.user); // Met à jour le contexte utilisateur si besoin
+
           // Relance la requête initiale
-          response = await fetch(url, fetchOptions);
+          response = await fetch(`${gatewayURL}${url}`, fetchOptions);
         } else {
           logout();
           return {

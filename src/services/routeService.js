@@ -66,7 +66,7 @@ export function useRoutesAPI() {
         throw new Error(error || "Failed to add navigation");
       }
 
-      return await data;
+      return data;
     } catch (error) {
       console.error(error);
       throw error;
@@ -89,7 +89,7 @@ export function useRoutesAPI() {
         throw new Error(error || "Failed to fetch navigations");
       }
 
-      return await data;
+      return data;
     } catch (error) {
       console.error(error);
       throw error;
@@ -137,7 +137,7 @@ export function useRoutesAPI() {
         throw new Error(error || "Failed to update navigation visibility");
       }
 
-      return await data;
+      return data;
     } catch (error) {
       console.error(error);
       throw error;
@@ -160,7 +160,7 @@ export function useRoutesAPI() {
         throw new Error(error || "Failed to delete navigation");
       }
 
-      return await data;
+      return data;
     } catch (error) {
       console.error(error);
       throw error;
@@ -184,7 +184,7 @@ export function useRoutesAPI() {
         throw new Error(error || "Failed to update navigation");
       }
 
-      return await data;
+      return data;
     } catch (error) {
       console.error(error);
       throw error;
