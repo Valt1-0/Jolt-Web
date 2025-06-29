@@ -82,58 +82,62 @@ const Home = () => {
           />
         </motion.div>
       </motion.section>
-      <img
-        src="/src/assets/transitions/wave2.svg"
-        alt="Vague"
-        className="w-full h-auto"
-      />
-      {/* FONCTIONNALITÉS */}
-      <motion.section
-        className="py-8 bg-[#70E575]"
+      <motion.div
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.6 }}
       >
-        <div className="max-w-6xl mx-auto px-6">
-          <h2 className="text-3xl font-bold text-center text-white mb-12">
-            Fonctionnalités clés
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {[
-              {
-                title: "Localisation en temps réel",
-                desc: "Sache à tout moment où sont les trottinettes disponibles autour de toi.",
-              },
-              {
-                title: "Itinéraire optimisé",
-                desc: "Obtiens l’itinéraire le plus rapide et écologique selon ta position.",
-              },
-              {
-                title: "Historique des trajets",
-                desc: "Consulte tous tes trajets précédents et leur impact écologique.",
-              },
-            ].map((item, idx) => (
-              <motion.div
-                key={idx}
-                className="bg-white p-6 rounded-2xl shadow-xl border border-gray-200/70"
-                whileHover={{ y: -5 }}
-                transition={{ duration: 0.3 }}
-              >
-                <h3 className="text-xl font-semibold text-[#70E575] mb-2">
-                  {item.title}
-                </h3>
-                <p className="text-gray-600">{item.desc}</p>
-              </motion.div>
-            ))}
+        <img
+          src="/src/assets/transitions/wave2.svg"
+          alt="Vague"
+          className="w-full h-auto"
+        />
+
+        {/* FONCTIONNALITÉS */}
+        <section className="py-8 bg-[#70E575]">
+          <div className="max-w-6xl mx-auto px-6">
+            <h2 className="text-3xl font-bold text-center text-white mb-12">
+              Fonctionnalités clés
+            </h2>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              {[
+                {
+                  title: "Localisation en temps réel",
+                  desc: "Sache à tout moment où sont les trottinettes disponibles autour de toi.",
+                },
+                {
+                  title: "Itinéraire optimisé",
+                  desc: "Obtiens l’itinéraire le plus rapide et écologique selon ta position.",
+                },
+                {
+                  title: "Historique des trajets",
+                  desc: "Consulte tous tes trajets précédents et leur impact écologique.",
+                },
+              ].map((item, idx) => (
+                <motion.div
+                  key={idx}
+                  className="bg-white p-6 rounded-2xl shadow-xl border border-gray-200/70"
+                  whileHover={{ y: -5 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <h3 className="text-xl font-semibold text-[#70E575] mb-2">
+                    {item.title}
+                  </h3>
+                  <p className="text-gray-600">{item.desc}</p>
+                </motion.div>
+              ))}
+            </div>
           </div>
-        </div>
-      </motion.section>
-      <img
-        src="/src/assets/transitions/wave1.svg"
-        alt="Vague"
-        className="w-full h-auto"
-      />
+        </section>
+
+        <img
+          src="/src/assets/transitions/wave1.svg"
+          alt="Vague"
+          className="w-full h-auto"
+        />
+      </motion.div>
+
       {/* TYPES DE VÉHICULES */}
       <motion.section
         className="py-8  bg-white"
@@ -172,45 +176,46 @@ const Home = () => {
         </div>
       </motion.section>
 
-      <img
-        src="/src/assets/transitions/wave3.svg"
-        alt="Vague"
-        className="w-full h-auto -mt-4"
-      />
-
-      {/* STATISTIQUES */}
-      <motion.section
-        className="py-8 bg-[#70E575]"
+      <motion.div
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.5 }}
         transition={{ duration: 0.6 }}
-        onViewportEnter={() => setIsVisible(true)} // quand la section entre dans la vue, on active l'anim
+        onViewportEnter={() => setIsVisible(true)}
       >
-        <div className="max-w-6xl mx-auto px-6 grid grid-cols-1 sm:grid-cols-3 gap-8 text-center">
-          {stats.map((stat, idx) => (
-            <motion.div
-              key={idx}
-              initial={{ opacity: 0, y: 10 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: idx * 0.2 }}
-              viewport={{ once: true }}
-              className="bg-white rounded-xl p-6 shadow-md"
-            >
-              <p className="text-3xl font-extrabold text-[#70E575]">
-                <AnimatedNumber value={stat.value} isVisible={isVisible} />
-              </p>
-              <p className="text-gray-600 mt-2">{stat.label}</p>
-            </motion.div>
-          ))}
-        </div>
-      </motion.section>
+        <img
+          src="/src/assets/transitions/wave3.svg"
+          alt="Vague"
+          className="w-full h-auto -mt-4"
+        />
 
-      <img
-        src="/src/assets/transitions/wave4.svg"
-        alt="Vague"
-        className="w-full h-auto"
-      />
+        {/* STATISTIQUES */}
+        <section className="py-8 bg-[#70E575]">
+          <div className="max-w-6xl mx-auto px-6 grid grid-cols-1 sm:grid-cols-3 gap-8 text-center">
+            {stats.map((stat, idx) => (
+              <motion.div
+                key={idx}
+                initial={{ opacity: 0, y: 10 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ delay: idx * 0.2 }}
+                viewport={{ once: true }}
+                className="bg-white rounded-xl p-6 shadow-md"
+              >
+                <p className="text-3xl font-extrabold text-[#70E575]">
+                  <AnimatedNumber value={stat.value} isVisible={isVisible} />
+                </p>
+                <p className="text-gray-600 mt-2">{stat.label}</p>
+              </motion.div>
+            ))}
+          </div>
+        </section>
+
+        <img
+          src="/src/assets/transitions/wave4.svg"
+          alt="Vague"
+          className="w-full h-auto"
+        />
+      </motion.div>
 
       {/* TÉMOIGNAGES */}
       <motion.section
