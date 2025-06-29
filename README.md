@@ -17,9 +17,7 @@ La version Web de l’application mobile <a href="https://github.com/MitryDim/Jo
 <img src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg" alt="PRs welcome!" />
 </p>
 <h3 align="center">
-<a href="#-fonctionnalités">Fonctionnalités</a>
-<span> · </span>
-<a href="#-installation">Installation</a>
+<a href="#-fonctionnalités-principales">Fonctionnalités</a>
 <span> · </span>
 <a href="#-configuration">Configuration</a>
 <span> · </span>
@@ -88,6 +86,18 @@ Voici ce que vous pouvez faire avec Jolt Web :
 
 </div>
 
+## 📝 Prérequis
+
+Avant d’utiliser ou de contribuer à Jolt Web, assurez-vous d’avoir :
+
+- **Node.js** (version 18 ou supérieure)
+- **npm** (ou **yarn**)
+- Un accès à l’API [Jolt-API](https://github.com/Valt1-0/Jolt-API)
+- Une clé API OpenRouteService (optionnelle, pour la planification d’itinéraires)
+
+Installez Node.js et npm depuis [nodejs.org](https://nodejs.org/).  
+Clonez ce dépôt et suivez la section [Configuration](#-configuration) pour démarrer rapidement.
+
 ---
 
 ## ⚙️ Comment ça fonctionne ?
@@ -132,17 +142,6 @@ Assurez-vous que l’API Jolt-API soit accessible depuis votre application.
 - `src/hooks` : hooks personnalisés
 - `src/utils` : fonctions utilitaires
 - `src/services` : services pour les appels API
-
----
-
-## 🛠 Technologies utilisées
-
-- React avec Vite
-- Tailwind CSS
-- Framer Motion
-- GPX Builder
-- Leaflet avec React-Leaflet
-- React Router
 
 ---
 
