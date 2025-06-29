@@ -17,11 +17,11 @@ La version Web de l’application mobile <a href="https://github.com/MitryDim/Jo
 <img src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg" alt="PRs welcome!" />
 </p>
 <h3 align="center">
-<a href="#-fonctionnalités-principales">Fonctionnalités</a>
-<span> · </span>
-<a href="#-configuration">Configuration</a>
-<span> · </span>
-<a href="#-contribution">Contribution</a>
+    <a href="#-fonctionnalités-principales">Fonctionnalités</a>
+    <span> · </span>
+    <a href="#️-configuration">Configuration</a>
+    <span> · </span>
+    <a href="#-contribution">Contribuer</a>
 </h3>
 
 ---
