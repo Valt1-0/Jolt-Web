@@ -11,6 +11,7 @@ import Roadbook from "./pages/Roadbook";
 import { Toaster } from "sonner";
 import Subscription from "./pages/Subscription";
 import Maintains from "./pages/Maintains";
+import NotFound from "./pages/NotFound";
 
 const ProtectedRoute = ({ children }) => {
   const { isLoggedIn } = useAuth();
@@ -44,14 +45,7 @@ function App() {
         <Toaster position="top-right" richColors />
         <div className="pt-18">
           <Routes>
-            <Route
-              path="/"
-              element={
-                <ProtectedRoute>
-                  <Home />
-                </ProtectedRoute>
-              }
-            />
+            <Route path="/" element={<Home />} />
             <Route path="/verifyEmail" element={<VerifyEmail />} />
             <Route
               path="/roadbook"
@@ -102,6 +96,7 @@ function App() {
                 </RoleProtectedRoute>
               }
             />
+            <Route path="*" element={<NotFound />} />
           </Routes>
         </div>
       </Router>

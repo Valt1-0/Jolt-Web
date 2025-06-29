@@ -35,9 +35,9 @@ const Home = () => {
   }
 
   const stats = [
-    { label: "VLEU disponibles", value: "1 200+" },
-    { label: "Trajets réalisés", value: "85 000+" },
-    { label: "Kg CO₂ économisés", value: "14 320" },
+    { label: "Utilisateurs Inscrits", value: "1 200+" },
+    { label: "Trajets crées", value: "4 700+" },
+    { label: "Maintenances réalisés", value: "234" },
   ];
 
   const [isVisible, setIsVisible] = useState(false);
@@ -56,8 +56,8 @@ const Home = () => {
             Trouve ta trottinette en un clin d'œil
           </h1>
           <p className="text-lg text-gray-600 mb-8">
-            Localise instantanément les VLEU autour de toi, accède aux
-            itinéraires optimisés et démarre ton trajet facilement.
+            Accède à des itinéraires optimisés, démarre ton trajet facilement et
+            découvre la mobilité douce près de toi.
           </p>
           <motion.a
             whileHover={{ scale: 1.05 }}
@@ -154,7 +154,7 @@ const Home = () => {
             {[
               { name: "Trottinette", img: "scooter.svg" },
               { name: "Vélo électrique", img: "bike.svg" },
-              { name: "Gyropode", img: "gyropod.svg" },
+              { name: "A pied", img: "onfoot.svg" },
             ].map((veh, idx) => (
               <motion.div
                 key={idx}
@@ -233,7 +233,7 @@ const Home = () => {
             {[
               {
                 name: "Sophie L.",
-                text: "L'app est super intuitive. J'ai trouvé une trottinette en moins de 2 minutes !",
+                text: "L'app est super intuitive. Je crée mes trajets en un clin d'œil !",
               },
               {
                 name: "Marc D.",
