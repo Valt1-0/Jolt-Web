@@ -86,6 +86,8 @@ Voici ce que vous pouvez faire avec Jolt Web :
 
 </div>
 
+---
+
 ## 📝 Prérequis
 
 Avant d’utiliser ou de contribuer à Jolt Web, assurez-vous d’avoir :
@@ -95,8 +97,39 @@ Avant d’utiliser ou de contribuer à Jolt Web, assurez-vous d’avoir :
 - Un accès à l’API [Jolt-API](https://github.com/Valt1-0/Jolt-API)
 - Une clé API OpenRouteService (optionnelle, pour la planification d’itinéraires)
 
-Installez Node.js et npm depuis [nodejs.org](https://nodejs.org/).  
+Installez Node.js et npm depuis [nodejs.org](https://nodejs.org/).
 Clonez ce dépôt et suivez la section [Configuration](#-configuration) pour démarrer rapidement.
+
+---
+
+## 🚀 Installation
+
+1. **Clonez le dépôt** :
+
+   ```bash
+   git clone https://github.com/Valt1-0/Jolt-Web.git
+   cd Jolt-Web
+   ```
+
+2. **Installez les dépendances** :
+
+   ```bash
+   npm install
+   # ou
+   yarn install
+   ```
+
+3. **Configurez l’environnement** :
+Suivez la section [Configuration](#️-configuration) pour créer le fichier `.env`.
+
+4. **Lancez le projet en développement** :
+   ```bash
+   npm run dev
+   # ou
+   yarn dev
+   ```
+
+L’application sera accessible sur [http://localhost:8000](http://localhost:8000) par défaut.
 
 ---
 
