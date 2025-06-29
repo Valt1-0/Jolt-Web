@@ -27,7 +27,7 @@ export function useMaintainsHistoryAPI() {
   const getMaintainHistories = async (query) => {
     let url = `/maintainHistory`;
     if (query) {
-      url += `?vehicleId=${query}`;
+      url += `${query}`;
     }
 
     const { data, error, status } = await fetchWithAuth(

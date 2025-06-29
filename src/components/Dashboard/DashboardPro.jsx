@@ -88,7 +88,7 @@ export default function DashboardPro({ currentUser }) {
 
   async function fetchVehicleMaintains(vehicleId) {
     try {
-      const res = await getMaintainHistories(vehicleId);
+      const res = await getMaintainHistories(`?vehicleId=${vehicleId}`);
       setMaintainHistories(res.data || []);
     } catch (err) {
       toast.error("Erreur lors du chargement des maintenances.");

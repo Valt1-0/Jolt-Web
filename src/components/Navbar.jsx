@@ -18,7 +18,12 @@ const Navbar = () => {
       roles: ["admin", "pro"],
     },
     { name: "Roadbook", route: "/roadbook", auth: true },
-    { name: "Mes maintenances", route: "/maintains", auth: true },
+    {
+      name: "Mes maintenances",
+      route: "/maintains",
+      auth: true,
+      roles: ["member"],
+    },
     { name: "Abonnement", route: "/subscription", auth: false },
     { name: "Profile", route: "/profile", auth: true },
     { name: "Connexion", route: "/auth", auth: false },

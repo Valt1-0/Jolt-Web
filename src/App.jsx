@@ -72,9 +72,9 @@ function App() {
             <Route
               path="/maintains"
               element={
-                <ProtectedRoute>
+                <RoleProtectedRoute allowedRoles={"member"}>
                   <Maintains />
-                </ProtectedRoute>
+                </RoleProtectedRoute>
               }
             />
             <Route path="/subscription" element={<Subscription />} />
