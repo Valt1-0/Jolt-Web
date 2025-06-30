@@ -7,26 +7,33 @@ export default function RouteFormModal({
   initialData,
 }) {
   const [name, setName] = useState("");
-  const [note, setNote] = useState(3);
+  const [notes, setNotes] = useState(3);
   const [isPublic, setIsPublic] = useState(false);
 
   useEffect(() => {
     if (initialData) {
       setName(initialData.name || "");
-      setNote(initialData.note ?? 3);
+      setNotes(initialData.notes.rating ?? 3);
       setIsPublic(initialData.isPublic || false);
     } else {
       setName("");
-      setNote(3);
+      setNotes(3);
       setIsPublic(false);
     }
+
+    console.log("Initial data set:", {
+      name,
+      notes,
+      isPublic,
+    });
+
   }, [initialData]);
 
   function handleSubmit(e) {
     e.preventDefault();
     onSave({
       name,
-      note,
+      notes,
       isPublic,
     });
   }
@@ -57,8 +64,8 @@ export default function RouteFormModal({
         <label className="block mb-4 font-medium">
           Note du trajet
           <select
-            value={note}
-            onChange={(e) => setNote(parseInt(e.target.value, 10))}
+            value={notes}
+            onChange={(e) => setNotes(parseInt(e.target.value, 10))}
             className="w-full border rounded px-3 py-2 mt-1"
           >
             {[1, 2, 3, 4, 5].map((n) => (
