@@ -64,9 +64,6 @@ export default function DashboardAdmin() {
       const navs = navsResponse?.data?.navigations || [];
       setTrajets(navs);
 
-      console.log("Trajets récupérés:", navs);
-      
-
       // Véhicules
       const vehiclesResponse = await getAllVehicles();
       const allVehicles = vehiclesResponse?.data || [];
@@ -214,7 +211,6 @@ export default function DashboardAdmin() {
           { key: "users", label: "Utilisateurs" },
           { key: "trajets", label: "Trajets" },
           { key: "vehicles", label: "Véhicules" },
-          { key: "maintenance", label: "Maintenance" },
         ].map((tab) => (
           <motion.button
             key={tab.key}
@@ -273,25 +269,6 @@ export default function DashboardAdmin() {
               }}
               onDelete={(v) => setConfirmDelete(v)}
             />
-          )}
-
-          {activeTab === "maintenance" && (
-            <div>
-              <h2 className="text-xl font-semibold mb-4">Maintenance</h2>
-              <ul className="list-disc pl-5 text-gray-700 space-y-2">
-                <li>⚙️ Vérifier les backups de la base de données</li>
-                <li>🔄 Synchroniser les trajets avec les services externes</li>
-                <li>🛡️ Contrôler les droits des utilisateurs</li>
-              </ul>
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                onClick={() => alert("Maintenance lancée")}
-                className="mt-4 px-4 py-2 bg-[#70E575] text-white rounded hover:bg-[#5bcc65]"
-              >
-                Démarrer une maintenance
-              </motion.button>
-            </div>
           )}
         </motion.div>
       </AnimatePresence>
