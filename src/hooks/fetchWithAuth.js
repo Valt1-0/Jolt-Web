@@ -3,7 +3,7 @@ import { useAuth } from "../context/authContext";
 const gatewayURL = import.meta.env.VITE_API_GATEWAY_URL;
 
 export function useFetchWithAuth() {
-  const { user, logout, login } = useAuth();
+  const { user, logout } = useAuth();
 
   const fetchWithAuth = async (url, options = {}, opts = {}) => {
     try {

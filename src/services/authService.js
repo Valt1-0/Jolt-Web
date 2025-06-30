@@ -10,8 +10,6 @@ export function useAuthAPI() {
         body: JSON.stringify(userData),
       });
 
-      console.log(`Login response: ${JSON.stringify(data)}`);
-
       if (status !== 200 || error) throw new Error(error || "Login failed");
 
       return await data;

@@ -119,6 +119,7 @@ const Auth = () => {
               />
               <button
                 type="button"
+                data-cy="toggle-password-visibility"
                 onClick={() => setShowPassword((prev) => !prev)}
                 className="absolute right-3 top-2/4 -translate-y-2/4 text-[#70E575]"
               >
@@ -138,6 +139,7 @@ const Auth = () => {
                 />
                 <button
                   type="button"
+                  data-cy="toggle-password-visibility"
                   onClick={() => setShowPassword((prev) => !prev)}
                   className="absolute right-3 top-2/4 -translate-y-2/4 text-[#70E575]"
                 >

@@ -133,6 +133,47 @@ L’application sera accessible sur [http://localhost:8000](http://localhost:800
 
 ---
 
+## 🧪 Tests
+
+Jolt Web utilise **Cypress** pour les tests end-to-end (E2E) afin de garantir la qualité et la stabilité de l’application.
+
+### Lancer les tests
+
+Pour exécuter la suite de tests Cypress :
+
+```bash
+npm run cypress
+# ou
+yarn cypress
+```
+
+Ou lancez l’interface graphique de Cypress :
+
+```bash
+npx cypress open
+```
+
+### Structure des tests
+
+- Les fichiers de test Cypress se trouvent dans le dossier `cypress/e2e`.
+- Tests actuellement présents :
+    - `auth.cy.js` : Tests d’authentification (inscription, connexion, déconnexion).
+- Les tests couvrent les parcours utilisateurs principaux et les fonctionnalités critiques.
+
+### Outils utilisés
+
+- **Cypress** – Tests E2E interactifs et robustes pour applications web
+
+### Bonnes pratiques
+
+- Écrivez des tests pour chaque nouvelle fonctionnalité ou correction de bug.
+- Simulez les interactions utilisateur réelles (clics, saisies, navigation).
+- Vérifiez l’affichage, les redirections et les messages d’erreur.
+
+Consultez les fichiers du dossier `cypress/e2e` pour des exemples de scénarios de test.
+
+---
+
 ## ⚙️ Comment ça fonctionne ?
 
 Jolt Web repose sur une interface moderne construite avec :
