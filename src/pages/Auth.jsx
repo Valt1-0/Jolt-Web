@@ -16,7 +16,7 @@ const Auth = () => {
   const [loading, setLoading] = useState(false);
 
   const { login: loginUser } = useAuth();
-  const { login, register, verifyEmail } = useAuthAPI();
+  const { login, register } = useAuthAPI();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
