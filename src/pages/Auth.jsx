@@ -6,8 +6,8 @@ import { useAuthAPI } from "../services/authService";
 
 const Auth = () => {
   const [isLogin, setIsLogin] = useState(true);
-  const [email, setEmail] = useState("tyranix61@gmail.com");
-  const [password, setPassword] = useState("Azertyuiop123!");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [username, setUsername] = useState("");
   const [showPassword, setShowPassword] = useState(false);
