@@ -12,6 +12,8 @@ import { Toaster } from "sonner";
 import Subscription from "./pages/Subscription";
 import Maintains from "./pages/Maintains";
 import NotFound from "./pages/NotFound";
+import PaymentSuccess from "./pages/PaymentSuccess";
+import PaymentCancel from "./pages/PaymentCancel";
 
 const ProtectedRoute = ({ children }) => {
   const { isLoggedIn } = useAuth();
@@ -96,6 +98,9 @@ function App() {
                 </RoleProtectedRoute>
               }
             />
+            <Route path="/payment/success" element={<PaymentSuccess />} />
+            <Route path="/payment/cancel" element={<PaymentCancel />} />
+
             <Route path="*" element={<NotFound />} />
           </Routes>
         </div>
