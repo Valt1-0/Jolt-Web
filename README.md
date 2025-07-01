@@ -41,6 +41,20 @@ C’est une version Web de notre application mobile [Jolt-Mobile](https://github
 
 ---
 
+## 🎬 Démonstration vidéo
+
+<div align="center">
+
+|                                         Version Membre                                          |                                         Version Admin                                          |                                         Version Professionnel                                          |
+| :---------------------------------------------------------------------------------------------: | :--------------------------------------------------------------------------------------------: | :----------------------------------------------------------------------------------------------------: |
+| [![Version Membre](https://img.youtube.com/vi/8v3CKQ9QaXA/0.jpg)](https://youtu.be/8v3CKQ9QaXA) | [![Version Admin](https://img.youtube.com/vi/WIugD-oQqgY/0.jpg)](https://youtu.be/WIugD-oQqgY) | [![Version Professionnel](https://img.youtube.com/vi/Bag2bf0KPl4/0.jpg)](https://youtu.be/Bag2bf0KPl4) |
+
+</div>
+
+</div>
+
+---
+
 ## 📦 Fonctionnalités principales
 
 Voici ce que vous pouvez faire avec Jolt Web :
@@ -120,7 +134,7 @@ Clonez ce dépôt et suivez la section [Configuration](#-configuration) pour dé
    ```
 
 3. **Configurez l’environnement** :
-Suivez la section [Configuration](#️-configuration) pour créer le fichier `.env`.
+   Suivez la section [Configuration](#️-configuration) pour créer le fichier `.env`.
 
 4. **Lancez le projet en développement** :
    ```bash
@@ -157,7 +171,7 @@ npx cypress open
 
 - Les fichiers de test Cypress se trouvent dans le dossier `cypress/e2e`.
 - Tests actuellement présents :
-    - `auth.cy.js` : Tests d’authentification (inscription, connexion, déconnexion).
+  - `auth.cy.js` : Tests d’authentification (inscription, connexion, déconnexion).
 - Les tests couvrent les parcours utilisateurs principaux et les fonctionnalités critiques.
 
 ### Outils utilisés
